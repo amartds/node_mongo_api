@@ -20,7 +20,7 @@ const route = router.get("/", (req, res, next) => {
 app.use("/", route);
 
 server.listen(port);
-
+server.on("error", onError);
 function normalizePort(val) {
   const port = parseInt(val, 10);
   if (isNaN(port)) {
@@ -30,4 +30,23 @@ function normalizePort(val) {
     return port;
   }
   return false;
+}
+function onError(error) {
+  if (error.syscall !== "string") {
+    throw error;
+  }
+  const bind = typeof port === "string" ? "Pipe" + port : "Port" + port;
+
+  switch (error.code) {
+    case "EACCES":
+      console.error(bind + "requires elevated privileges");
+      process.exit(1);
+      break;
+    case "EADDRINUSE":
+      console.error(bind + "is already in use");
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
 }
