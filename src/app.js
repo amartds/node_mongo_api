@@ -11,15 +11,25 @@ const route = router.get("/", (req, res, next) => {
   });
 });
 
-const create = router.post("/", (req, res, next) => {
+const create = router.post("/product/", (req, res, next) => {
   res.status(201).send(req.body);
 });
 
-const update = router.put("/:id", (req, res, next) => {
+const update = router.put("/product/:id", (req, res, next) => {
   const { id } = req.params;
   res.status(201).send(`Parametro enviado ${id}`);
 });
 
+const del = router.delete("/product/:id", (req, res, next) => {
+  const { id } = req.params;
+  res.status(200).send({
+    id,
+    title: "qualquer coisa",
+  });
+});
+
 app.use("/", route);
+app.use("/product", create);
+app.use("/product", update);
 
 module.exports = app;
