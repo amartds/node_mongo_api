@@ -1,5 +1,16 @@
+const Product = require('../models/Product')
+
 exports.post = ("/", (req, res, next) => {
-  res.status(201).send(req.body);
+  let product = new Product(req.body);
+  product.save().then(s => {
+    res.status(201).send({
+      "message":"success"
+    });
+  }).catch(e=>{
+    res.status(400).send({
+      "message":"error"
+    })
+  });
 });
 
 exports.put = ("/:id", (req, res, next) => {
