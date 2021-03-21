@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-
 class Database {
   constructor() {
     this.mongo();
@@ -11,6 +10,6 @@ class Database {
       useFindAndModify: true,
       useUnifiedTopology: true,
     });
-  }
+  };
 }
 module.exports = new Database();
