@@ -1,21 +1,11 @@
 const express = require("express");
 const router = express.Router();
+const controller = require('../controllers/products')
 
-router.post("/", (req, res, next) => {
-  res.status(201).send(req.body);
-});
+router.post("/", controller.post);
 
-router.put("/:id", (req, res, next) => {
-  const { id } = req.params;
-  res.status(201).send(`Parametro enviado ${id}`);
-});
+router.put("/:id",controller.put);
 
-router.delete("/:id", (req, res, next) => {
-  const { id } = req.params;
-  res.status(200).send({
-    id,
-    title: "qualquer coisa",
-  });
-});
+router.delete("/:id", controller.delete);
 
 module.exports = router;
