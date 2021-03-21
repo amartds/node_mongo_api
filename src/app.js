@@ -13,5 +13,6 @@ app.use(bodyParser.json());
 
 app.use("/", index);
 app.use("/product", product);
+app.use("/products", product);
 
 module.exports = app;
