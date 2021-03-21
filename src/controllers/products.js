@@ -40,6 +40,19 @@ exports.getById = (req, res, next) => {
     });
 };
 
+exports.getByTags = (req, res, next) => {
+  Product.find(
+    {tags: req.params.tag })
+    .then((data) => {
+      res.status(200).send(data);
+    })
+    .catch((err) => {
+      res.status(400).send({
+        message: "not found",
+      });
+    });
+};
+
 exports.post =
   ("/",
   (req, res, next) => {
