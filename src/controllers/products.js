@@ -28,8 +28,7 @@ exports.getBySlug = (req, res, next) => {
 };
 
 exports.getById = (req, res, next) => {
-  Product.findOne(
-    {_id: req.params.id })
+  Product.findOne({ _id: req.params.id })
     .then((data) => {
       res.status(200).send(data);
     })
@@ -41,8 +40,7 @@ exports.getById = (req, res, next) => {
 };
 
 exports.getByTags = (req, res, next) => {
-  Product.find(
-    {tags: req.params.tag })
+  Product.find({ tags: req.params.tag })
     .then((data) => {
       res.status(200).send(data);
     })
@@ -71,12 +69,22 @@ exports.post =
       });
   });
 
-exports.put =
-  ("/:id",
-  (req, res, next) => {
-    const { id } = req.params;
-    res.status(201).send(`Parametro enviado ${id}`);
-  });
+exports.put = (req, res, next) => {
+  Product.findByIdAndUpdate(req.params.id, {
+    $set: {
+      title: req.body.title,
+      description: req.body.description,
+      price: req.body.price,
+      slug: req.body.slug,
+    },
+  })
+    .then((data) => {
+      res.status(201).send({ message: "success" });
+    })
+    .catch((err) => {
+      res.status(201).send({ message: "error" });
+    });
+};
 
 exports.delete =
   ("/:id",
