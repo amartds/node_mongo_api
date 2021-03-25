@@ -86,12 +86,12 @@ exports.put = (req, res, next) => {
     });
 };
 
-exports.delete =
-  ("/:id",
-  (req, res, next) => {
-    const { id } = req.params;
-    res.status(200).send({
-      id,
-      title: "qualquer coisa",
+exports.delete = ((req, res, next) => {
+  Product.findOneAndRemove(req.params.id)
+    .then((data) => {
+      res.status(201).send({ message: "success" });
+    })
+    .catch((err) => {
+      res.status(201).send({ message: "error" });
     });
-  });
+});
