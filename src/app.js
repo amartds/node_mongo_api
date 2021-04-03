@@ -7,9 +7,10 @@ const index = require("./routes/index");
 const product = require("./routes/product");
 const customer = require("./routes/customer");
 const order = require("./routes/order");
+const cors =require('cors')
 require('./database/index');
 
-
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
