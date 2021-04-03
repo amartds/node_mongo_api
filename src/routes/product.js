@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const controller = require('../controllers/products')
+const authService = require('../services/auth/auth-service')
 
-router.post("/", controller.post);
+router.post("/", authService.authorize, controller.post);
 
 router.get("/", controller.get);
 
